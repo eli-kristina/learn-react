@@ -5,6 +5,7 @@ import {
   	Switch
 } from "react-router-dom";
 
+import history from "../utils/history";
 import Login from "./Login";
 import Home from "./Home";
 
@@ -12,10 +13,10 @@ class Routes extends React.Component {
 	render() {
 	  	return (
 	  		<div className="main-panel">
-		  		<Router>
+		  		<Router history={history}>
 		  			<Switch>
 		  				<Route path="/login">
-				            <Login />
+				            <Login setUser={this.props.setUser} />
 				        </Route>
 				        <Route path="/">
 				            <Home />

@@ -1,17 +1,40 @@
 import React from "react";
 import ProductItem from "../components/product/Item";
-import { getBreeds } from "../services/breeds";
+import { GetBreeds } from "../services/api";
 
 class Home extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			breeds: []
+		}
+	}
+
+	componentDidMount() {
+		GetBreeds().then(res => {
+			if (res.status === 200 && res.data.error === "0") {
+				this.setState({breeds: res.data.data});
+			}
+		});
+	}
+
+	renderBreeds() {
+		const rows = [];
+		for(const item of this.state.breeds) {
+			rows.push(
+				<ProductItem item={item} />
+			);
+		}
+
+		return rows;
+	}
+
 	render() {
-		let breeds = getBreeds();
-
-		console.log(breeds);
-
 		return (
 			<div className="content-wrapper">
 				<div className="row">
-					<ProductItem/>
+					{this.renderBreeds()}
 				</div>
 			</div>
 		);

@@ -17,3 +17,7 @@ $ npm install
 # serve with reload at localhost:3000
 $ npm run start
 ```
+
+## Issue with CORS
+
+- install moesif-origin-cors-change chrome extension

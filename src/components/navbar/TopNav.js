@@ -3,20 +3,14 @@ import Logo from "../../assets/img/logo.svg";
 import LogoMini from "../../assets/img/logo-mini.svg";
 import { faBars, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { User } from "../../models/User";
 
-class TopNav extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {}
-    }
-  }
-
+class TopNav extends React.Component<{ user: User | undefined }> {
 	render() {
     let indexUrl = "/";
     let loginNav;
 
-    if (this.state.user) {
+    if (this.props.user === undefined) {
       loginNav = <li className="nav-item nav-profile dropdown">
                   <a className="nav-link" href="/login">
                     <div className="nav-profile-text">
@@ -28,7 +22,7 @@ class TopNav extends React.Component {
       loginNav = <li className="nav-item nav-profile dropdown">
                   <a className="nav-link" id="profileDropdown" href={indexUrl} data-toggle="dropdown" aria-expanded="false">
                     <div className="nav-profile-text">
-                      <p className="text-black font-weight-semibold m-0"> {this.state.user.name} </p>
+                      <p className="text-black font-weight-semibold m-0"> {this.props.user.user_name} </p>
                       <span className="font-13 online-color">
                         online <i className="mdi mdi-chevron-down"><FontAwesomeIcon icon={faChevronDown} /></i>
                       </span>
@@ -39,6 +33,7 @@ class TopNav extends React.Component {
                   </div>
                 </li>
     }
+
 
     return (
       <nav className="navbar top-navbar col-lg-12 col-12 p-0">
