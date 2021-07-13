@@ -1,7 +1,8 @@
 import React from "react";
+import { withRouter } from 'react-router-dom';
 import { LoginService } from "../services/api";
-import history from "../utils/history";
 import { User } from "../models/User";
+import history from "../utils/history";
 
 interface LoginProps {
 	setUser:(user: User) => void
@@ -9,7 +10,8 @@ interface LoginProps {
 
 interface LoginState {
 	username: string,
-	password: string
+	password: string,
+	errorMsg: string
 }
 
 class Login extends React.Component<LoginProps, LoginState> {
@@ -18,7 +20,8 @@ class Login extends React.Component<LoginProps, LoginState> {
 
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			errorMsg: ''
 		}
 	}
 
@@ -38,6 +41,8 @@ class Login extends React.Component<LoginProps, LoginState> {
 			if (res.status === 200 && res.data.error === "0") {
 				this.props.setUser(res.data.data);
 				history.push("/");
+			} else {
+				this.setState({errorMsg: <code>Username or Password invalid</code>});
 			}
 		});
 	}
@@ -49,12 +54,10 @@ class Login extends React.Component<LoginProps, LoginState> {
 					<div className="card">
 						<div className="card-body">
 							<h4 className="card-title">Login forms</h4>
+							{this.state.errorMsg}
 							<form className="form-inline" onSubmit={e => this.handleSubmit(e)}>
-								<label className="sr-only" for="username">Username</label>
-								<input type="text" className="form-control mb-2 mr-sm-2" id="username" placeholder="username" onChange={e => this.setState({username: e.target.value})} />
-
-								<label className="sr-only" for="password">Password</label>
-								<input type="password" className="form-control mb-2 mr-sm-2" id="password" placeholder="password" onChange={e => this.setState({password: e.target.value})} />
+								<input type="text" className="form-control mb-2 mr-sm-2" id="username" placeholder="Username" onChange={e => this.setState({username: e.target.value})} />
+								<input type="password" className="form-control mb-2 mr-sm-2" id="password" placeholder="Password" onChange={e => this.setState({password: e.target.value})} />
 
 								<button type="submit" className="btn btn-primary mb-2"> Submit </button>
 							</form>
@@ -66,4 +69,4 @@ class Login extends React.Component<LoginProps, LoginState> {
 	}
 }
 
-export default Login;
+export default withRouter(Login);

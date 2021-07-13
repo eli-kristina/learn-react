@@ -1,6 +1,6 @@
 import React from "react";
 import {
-	BrowserRouter as Router,
+	Router,
   	Route,
   	Switch
 } from "react-router-dom";
@@ -8,6 +8,8 @@ import {
 import history from "../utils/history";
 import Login from "./Login";
 import Home from "./Home";
+import Vote from "./Vote";
+import Favourite from "./Favourite";
 
 class Routes extends React.Component {
 	render() {
@@ -18,8 +20,14 @@ class Routes extends React.Component {
 		  				<Route path="/login">
 				            <Login setUser={this.props.setUser} />
 				        </Route>
-				        <Route path="/">
-				            <Home />
+				        <Route path="/votes">
+				            <Vote />
+				        </Route>
+						<Route path="/favourites">
+				            <Favourite />
+				        </Route>
+						<Route path="/">
+				            <Home user={this.props.user} />
 				        </Route>
 	      			</Switch>
 		  		</Router>

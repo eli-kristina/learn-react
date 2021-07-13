@@ -9,10 +9,12 @@ class App extends React.Component<{}, { user: User | undefined }> {
 		super(props);
 
 		this.state = {
-			user: undefined
+			user: undefined,
+			toogle: 0
 		}
 
 		this.setUser = this.setUser.bind(this)
+		this.setToogle = this.setToogle.bind(this)
 	}
 
 	setUser(user: User) { 
@@ -20,16 +22,22 @@ class App extends React.Component<{}, { user: User | undefined }> {
 			user: user
 		});
 	}
+	
+	setToogle(toogle: 0) {
+		this.setState({
+			toogle: toogle
+		});
+	}
 
 	render() {
 	  return (
 	    <div className="container-scroller">
 	    	<div className="horizontal-menu">
-	    		<TopNav user={this.state.user}/>
-	    		<BottomNav user={this.state.user}/>
+	    		<TopNav user={this.state.user} setToogle={this.setToogle}/>
+	    		<BottomNav user={this.state.user} toogle={this.state.toogle}/>
 	    	</div>
 	    	<div className="container-fluid page-body-wrapper">
-	    		<Routes setUser={this.setUser} />
+	    		<Routes user={this.state.user} setUser={this.setUser} />
 	    	</div>
 	    </div>
 	  );

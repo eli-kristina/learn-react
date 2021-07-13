@@ -1,21 +1,65 @@
 import React from "react";
-import { faCompass } from "@fortawesome/free-regular-svg-icons";
+import { faCompass, faStar, faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { User } from "../../models/User";
+import BottomNavItem from "./BottomNavItem";
 
-class BottomNav extends React.Component {
+interface BottomNavProps {
+	user: User | undefined,
+    toogle: 0
+}
+
+class BottomNav extends React.Component<BottomNavProps> {
+    renderMenu() {
+        const rows = [];
+        
+        let item = {
+            url: "/",
+            icon: <FontAwesomeIcon icon={faCompass} size="xs" />,
+            title: "Home"
+        };
+        
+        rows.push(
+            <BottomNavItem item={item}/>
+        );
+        
+        if (this.props.user) {
+            item = {
+                url: "/votes",
+                icon: <FontAwesomeIcon icon={faStar} size="xs" />,
+                title: "Votes"
+            };
+            
+            rows.push(
+                <BottomNavItem item={item}/>
+            );
+            
+            item = {
+                url: "/favourites",
+                icon: <FontAwesomeIcon icon={faBookmark} size="xs" />,
+                title: "Favourites"
+            };
+            
+            rows.push(
+                <BottomNavItem item={item}/>
+            );
+        }
+        
+        return rows;
+    }
+    
     render() {
-      let dashboardUrl = "/";
+      let className = 'bottom-navbar';
+      
+      if (this.props.toogle) {
+        className = 'bottom-navbar header-toggled';
+      }
 
       return (
-        <nav className="bottom-navbar">
+        <nav className={className}>
         	<div className="container">
         		<ul className="nav page-navigation">
-        			<li className="nav-item">
-        				<a className="nav-link" href={dashboardUrl}>
-        					<i className="mdi menu-icon"><FontAwesomeIcon icon={faCompass} size="xs" /></i>
-        					<span className="menu-title">Home</span>
-        				</a>
-        			</li>
+                    {this.renderMenu()}
         		</ul>
         	</div>
         </nav>
