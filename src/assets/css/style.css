@@ -7532,3 +7532,10 @@ dl li {
   -ms-flex-pack: justify !important;
   justify-content: space-between !important;
 }
+
+.product-original-price {
+  font-size: 15px;
+  color: gray;
+  text-align: right;
+  text-decoration: line-through;
+}

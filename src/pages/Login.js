@@ -5,7 +5,7 @@ import { User } from "../models/User";
 import history from "../utils/history";
 
 interface LoginProps {
-	setUser:(user: User) => void
+	setUser: (user: User) => void
 }
 
 interface LoginState {
@@ -29,20 +29,20 @@ class Login extends React.Component<LoginProps, LoginState> {
 		event.preventDefault();
 
 		const payload = {
-			'username': this.state.username,
+			'email': this.state.username,
 			'password': this.state.password
 		}
 		const headers = {
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': '*',
 		}
-		
+
 		LoginService(payload, headers).then(res => {
-			if (res.status === 200 && res.data.error === "0") {
+			if (res.status === 200 && res.data.error === 0) {
 				this.props.setUser(res.data.data);
 				history.push("/");
 			} else {
-				this.setState({errorMsg: <code>Username or Password invalid</code>});
+				this.setState({ errorMsg: <code>Username or Password invalid</code> });
 			}
 		});
 	}
@@ -56,8 +56,8 @@ class Login extends React.Component<LoginProps, LoginState> {
 							<h4 className="card-title">Login forms</h4>
 							{this.state.errorMsg}
 							<form className="form-inline" onSubmit={e => this.handleSubmit(e)}>
-								<input type="text" className="form-control mb-2 mr-sm-2" id="username" placeholder="Username" onChange={e => this.setState({username: e.target.value})} />
-								<input type="password" className="form-control mb-2 mr-sm-2" id="password" placeholder="Password" onChange={e => this.setState({password: e.target.value})} />
+								<input type="text" className="form-control mb-2 mr-sm-2" id="username" placeholder="Username" onChange={e => this.setState({ username: e.target.value })} />
+								<input type="password" className="form-control mb-2 mr-sm-2" id="password" placeholder="Password" onChange={e => this.setState({ password: e.target.value })} />
 
 								<button type="submit" className="btn btn-primary mb-2"> Submit </button>
 							</form>
