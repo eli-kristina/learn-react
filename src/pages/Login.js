@@ -37,14 +37,18 @@ class Login extends React.Component<LoginProps, LoginState> {
 			'Access-Control-Allow-Origin': '*',
 		}
 
-		LoginService(payload, headers).then(res => {
-			if (res.status === 200 && res.data.error === 0) {
-				this.props.setUser(res.data.data);
-				history.push("/");
-			} else {
+		LoginService(payload, headers)
+			.then(res => {
+				if (res.status === 200 && res.data.error === 0) {
+					this.props.setUser(res.data.data.user);
+					history.push("/");
+				} else {
+					this.setState({ errorMsg: <code>Username or Password invalid</code> });
+				}
+			})
+			.catch(err => {
 				this.setState({ errorMsg: <code>Username or Password invalid</code> });
-			}
-		});
+			});
 	}
 
 	render() {

@@ -7534,8 +7534,43 @@ dl li {
 }
 
 .product-original-price {
-  font-size: 15px;
   color: gray;
   text-align: right;
   text-decoration: line-through;
+}
+
+.banner-wrapper {
+  background-color: #aaa;
+}
+
+.banner-wrapper .banner-content {
+  padding: 45px 15px;
+}
+
+footer {
+  background-color: #0033c4;
+}
+
+footer h4 {
+  color: #fff;
+  font-size: 12px;
+}
+
+.tns-nav {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.tns-nav > [aria-controls] {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  margin: 0 5px;
+  border-radius: 50%;
+  background: #ddd;
+  border: 0;
+}
+
+.tns-nav > .tns-nav-active {
+  background: #999;
 }

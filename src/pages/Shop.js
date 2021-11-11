@@ -2,7 +2,7 @@ import React from "react";
 import ProductItem from "../components/product/Item";
 import { ShopService } from "../services/api";
 
-class Vote extends React.Component {
+class Shop extends React.Component {
     constructor(props) {
         super(props);
 
@@ -13,7 +13,6 @@ class Vote extends React.Component {
 
     componentDidMount() {
         ShopService().then(res => {
-            console.log(res);
             if (res.status === 200 && res.data.error === 0) {
                 this.setState({ products: res.data.data.products });
             }
@@ -34,10 +33,8 @@ class Vote extends React.Component {
     render() {
         return (
             <div className="content-wrapper">
-                <div className="page-header flex-wrap">
-                    <div className="header-left">
-                        <h3 className="m-0 pt-2">Shop</h3>
-                    </div>
+                <div className="page-header">
+                    <h3 className="page-title">Shop</h3>
                 </div>
                 <div className="row">
                     {this.renderProducts()}
@@ -47,4 +44,4 @@ class Vote extends React.Component {
     }
 }
 
-export default Vote;
+export default Shop;

@@ -1,6 +1,7 @@
 import React from "react";
 import TopNav from "../components/navbar/TopNav";
 import BottomNav from "../components/navbar/BottomNav";
+import Footer from "../components/footer/Index";
 import Routes from "./Routes";
 import { User } from "../models/User";
 
@@ -17,12 +18,12 @@ class App extends React.Component<{}, { user: User | undefined }> {
 		this.setToogle = this.setToogle.bind(this)
 	}
 
-	setUser(user: User) { 
+	setUser(user: User) {
 		this.setState({
 			user: user
 		});
 	}
-	
+
 	setToogle(toogle: 0) {
 		this.setState({
 			toogle: toogle
@@ -30,17 +31,18 @@ class App extends React.Component<{}, { user: User | undefined }> {
 	}
 
 	render() {
-	  return (
-	    <div className="container-scroller">
-	    	<div className="horizontal-menu">
-	    		<TopNav user={this.state.user} setToogle={this.setToogle}/>
-	    		<BottomNav user={this.state.user} toogle={this.state.toogle}/>
-	    	</div>
-	    	<div className="container-fluid page-body-wrapper">
-	    		<Routes user={this.state.user} setUser={this.setUser} />
-	    	</div>
-	    </div>
-	  );
+		return (
+			<div className="container-scroller">
+				<div className="horizontal-menu">
+					<TopNav user={this.state.user} setToogle={this.setToogle} />
+					<BottomNav user={this.state.user} toogle={this.state.toogle} />
+				</div>
+				<div className="container-fluid page-body-wrapper">
+					<Routes user={this.state.user} setUser={this.setUser} />
+					<Footer />
+				</div>
+			</div>
+		);
 	}
 }
 

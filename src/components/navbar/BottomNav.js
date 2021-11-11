@@ -20,7 +20,7 @@ class BottomNav extends React.Component<BottomNavProps> {
         };
 
         rows.push(
-            <BottomNavItem item={item} />
+            <BottomNavItem key="1" item={item} />
         );
 
         item = {
@@ -30,7 +30,7 @@ class BottomNav extends React.Component<BottomNavProps> {
         };
 
         rows.push(
-            <BottomNavItem item={item} />
+            <BottomNavItem key="2" item={item} />
         );
 
         item = {
@@ -40,7 +40,7 @@ class BottomNav extends React.Component<BottomNavProps> {
         };
 
         rows.push(
-            <BottomNavItem item={item} />
+            <BottomNavItem key="3" item={item} />
         );
 
         return rows;
