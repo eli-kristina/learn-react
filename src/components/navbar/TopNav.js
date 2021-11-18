@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Logo from "../../assets/img/logo.svg";
 import LogoMini from "../../assets/img/logo-mini.svg";
 import { User } from "../../models/User";
+import history from "../../utils/history";
 
 interface TopNavProps {
 	user: User | undefined,
@@ -27,8 +28,15 @@ class TopNav extends React.Component<TopNavProps, TopNavState> {
 		this.toogleMenu.bind(this);
 	}
 
-	toogleMenu(event) {
-		event.preventDefault();
+	handleLogout(ev) {
+		ev.preventDefault();
+
+		this.props.setUser(undefined);
+		history.push("/");
+	}
+
+	toogleMenu(ev) {
+		ev.preventDefault();
 
 		if (this.state.showDropdown === 'dropdown-menu navbar-dropdown') {
 			this.setState({ showDropdown: 'dropdown-menu navbar-dropdown show' })
@@ -37,8 +45,8 @@ class TopNav extends React.Component<TopNavProps, TopNavState> {
 		}
 	}
 
-	toogleMobile(event) {
-		event.preventDefault();
+	toogleMobile(ev) {
+		ev.preventDefault();
 
 		if (this.state.showToogle) {
 			this.setState({ showToogle: false });
@@ -75,7 +83,7 @@ class TopNav extends React.Component<TopNavProps, TopNavState> {
 				<div className={this.state.showDropdown}>
 					<a className="dropdown-item" href="/profile"><i className="mdi mdi-logout mr-2 text-primary"><FontAwesomeIcon icon={faUser} /></i> Profile </a>
 					<a className="dropdown-item" href="/order"><i className="mdi mdi-logout mr-2 text-primary"><FontAwesomeIcon icon={faHistory} /></i> Order History </a>
-					<a className="dropdown-item" href="/logout"><i className="mdi mdi-logout mr-2 text-primary"><FontAwesomeIcon icon={faSignOutAlt} /></i> Logout </a>
+					<a className="dropdown-item" href="/logout" onClick={e => this.handleLogout(e)}><i className="mdi mdi-logout mr-2 text-primary"><FontAwesomeIcon icon={faSignOutAlt} /></i> Logout </a>
 				</div>
 			</li>
 		}
